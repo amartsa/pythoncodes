@@ -42,4 +42,4 @@ The confusion matrix confirms this assessment. We are classifying most digits pr
 with only a few mistakes in digits 1 and 3 of the dataset. KNN seems to be a good image classifier -  and the original data is impeccable too
 
 """
-
+ 
