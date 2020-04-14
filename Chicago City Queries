@@ -1,3 +1,9 @@
+The following list provides assorted complex Neo4j queries aimed at providing clustering and re-labelling without the use of the APOC library
+for the Chicago City Dataset
+
+
+
+
 1) Which are the most prevalent factors for accidents among [Distraction Related, Alcohol Related, Street, and Weather] in descending order? What's their probability of happening?
 
 MATCH (dist:DistractRel)<-[:DISTRACTED]-(a:Accident)-[:WAS_DUI]->(alc:AlcoholRel) OPTIONAL MATCH (st:Streets)<-[:LOCATED_AT]-(a:Accident)-[:WEATHER]->(weath:Weather)
