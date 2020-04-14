@@ -1,0 +1,38 @@
+	2.1 Streets with most alcohol related accidents?
+MATCH(alc:AlcoholRel)<-[:WAS_DUI]-(a:Accident)-[:LOCATED_AT]->(st:Streets)
+WHERE alc.was= 'Y'
+RETURN distinct(st.StreetName) AS Street, count(*) AS NInstances ORDER BY NInstances DESC
+
+	2.2 Of these streets, which were the context factors most shared with non-alcohol related accidents?
+
+
+
+	3.1 Which WEATHER type has the MOST ACCIDENTS?
+MATCH (a:Accident)-[:WEATHER]->(weath:Weather)
+RETURN distinct(weath.was) AS Weather, count(*) AS NAccidents ORDER BY NInstances DESC
+	
+	
+	3.2 Which WEATHER type has the MOST ACCIDENTS WITH injuries?
+MATCH (inj:Ninjuries)<-[:NUM_INJURED]-(a:Accident)-[:WEATHER]->(weath:Weather)
+WHERE inj.number > 0
+RETURN distinct(weath.was) AS Weather, count(*) AS NAccidentsWithInjuries ORDER BY NAccidentsWithInjuries DESC	
+
+	3.3 Which STREETS have the MOST ACCIDENTS in the WEATHER with MOST ACCIDENTS? (WOULD LIKE TO BE ABLE TO AUTOMATICALLY EXTRACT TOP TWO INSTANCES OF WEATHER TYPE AND REFER TI THEM
+ 
+
+	3.4 Which STREETS have the MOST ACCIDENTS in the WEATHER with LEAST ACCIDENTS?
+MATCH (st:Streets)<-[:LOCATED_AT]-(a:Accident)-[:WEATHER]->(weath:Weather)
+WHERE NOT weath.was IN ["Clear", "Cloudy", "Rain"]
+RETURN distinct(st.StreetName) AS Street, count(*) AS NAccidents ORDER BY NAccidents DESC
+
+
+	4.1 What HOUR registers the MOST ACCIDENTS WITH ALCOHOL?
+MATCH 
+	
+	4.2 What HOUR registers the MOST ACCIDENTS WITHOUT ALCOHOL? What CONTEXT SPACE nodes are most prevalent?
+	4.3 What HOUR registers the MOST ACCIDENTS WITH INJURIES? What CONTEXT SPACE nodes are most prevalent?
+	4.4 What HOUR registers the MOST ACCIDENTS?
+	4.5 What HOUR registers the MOST ACCIDENTS WITH DISTRACTION? 
+	4.6 Can we cluster 4.4 and 4.5?
+	
+	Clustering - Influencing Factors or Severity

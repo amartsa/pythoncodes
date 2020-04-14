@@ -1,0 +1,483 @@
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Stack;
+/**
+ * FlushPlayer - a simple example implementation of the player interface for PokerSquares that 
+ * attempts to get flushes in the first four columns.
+ * Author: ________, based on code provided by Todd W. Neller and Michael Fleming
+ */
+public class CS6705ArielMartinez implements PokerSquaresPlayer {
+
+        private final int SIZE = 5; // number of rows/columns in square grid
+        private final int NUM_POS = SIZE * SIZE; // number of positions in square grid
+        private final int NUM_CARDS = Card.NUM_CARDS; // number of cards in deck
+        private Card[][] grid = new Card[SIZE][SIZE]; // grid with Card objects or null (for empty positions)
+        public int CardCounter; /*Keeps track of how many cards have been dealt*/
+        
+	/* (non-Javadoc)
+	 * @see PokerSquaresPlayer#setPointSystem(PokerSquaresPointSystem, long)
+	 */
+	@Override
+	public void setPointSystem(PokerSquaresPointSystem system, long millis) {
+		
+	}
+	
+	/* (non-Javadoc)
+	 * @see PokerSquaresPlayer#init()
+	 */
+	@Override
+	public void init() { 
+		CardCounter = 0; /* initializes the number of elapsed turns to zero*/       
+		// clear grid
+                for (int row = 0; row < SIZE; row++)
+                        for (int col = 0; col < SIZE; col++)
+                                grid[row][col] = null;
+
+	}
+
+	/* (non-Javadoc)
+	 * @see PokerSquaresPlayer#getPlay(Card, long)
+	 */
+	@Override
+	
+	
+	public int[] getPlay(Card card, long millisRemaining) {
+		CardCounter += 1;/* We keep track of how many cards have been dealt through here*/
+		/*PUT HERE THE COMMAND TO DELETE DRAWN CARD FROM REMAINING DECK*/
+		
+			int findpair = findPair(card, millisRemaining);
+			if( findpair == 50) {
+				return placeFlush(card, millisRemaining);
+			}
+			else return placePair(card, millisRemaining, findpair);
+		
+	}
+	
+	
+	
+	/* (non-Javadoc)
+	 * @see PokerSquaresPlayer#getName()
+	 */
+	@Override
+	public String getName() {
+		return "CS6705ArielMartinez";
+	}
+
+	/**
+	 * Demonstrate FlushPlayer play with British point system.
+	 * @param args (not used)
+	 */
+	public static void main(String[] args) {
+		PokerSquaresPointSystem system = PokerSquaresPointSystem.getBritishPointSystem();
+		System.out.println(system);
+		new PokerSquares(new CS6705ArielMartinez(), system).play(); // play a single game
+	}
+
+	public int findPair(Card card, long millisRemaining){
+        int rcount;
+        int ccount;
+        int pairMax = 0;
+        int counter;
+        int rowLocator = 50;
+        int max = 5;
+        
+        /* Here we look for the row that already has a card of same rank, and find row that has the most. Location row and count of
+         existing cards is stored in 2D array pairCounter[RowOfCountedSimilarCards][#ofCountedCards] */
+        
+        for (rcount = 0; rcount < max; rcount++ ) {
+        	counter = 0;
+        	
+        	for (ccount = 0; ccount < max; ccount++ ) {
+        		
+        		if (grid[rcount][ccount] == null) {
+        			continue;
+        		}
+        		
+        		if (grid[rcount][ccount].getRank() == card.getRank())
+        					counter += 1;
+        	}
+        	
+        	if(counter > 0 && counter > pairMax) {
+        		pairMax = counter;
+        		rowLocator = rcount;
+    		} 
+        }
+	return rowLocator;
+	}
+	
+	public int[] placeFlush(Card card, long millisRemaining){
+        int cardrow = 0;
+        int cardcol = 0;
+        int cardsuit = card.getSuit();
+        int flag = 0;
+        int rcount;
+        int max = 5;
+        
+        switch(cardsuit) {
+        
+        case 0: 
+        	
+        	outer:
+        	while(flag==0) {
+        		for (rcount = 0; rcount < max; rcount++ ) {
+        			if(grid[rcount][0] == null) {
+        				cardrow = rcount;
+        				cardcol = 0;
+        				break outer;
+        			}
+        		}
+        		for (rcount = 0; rcount < max; rcount++ ) {
+        			if(grid[rcount][4] == null) {
+        				cardrow = rcount;
+        				cardcol = 4;
+        				break outer;
+        			}
+        		}
+        		for (rcount = 0; rcount < max; rcount++ ) {
+        			if(grid[rcount][1] == null) {
+        				cardrow = rcount;
+        				cardcol = 1;
+        				break outer;
+        			}
+        		}
+        		for (rcount = 0; rcount < max; rcount++ ) {
+        			if(grid[rcount][2] == null) {
+        				cardrow = rcount;
+        				cardcol = 2;
+        				break outer;
+        			}
+        		}
+        		for (rcount = 0; rcount < max; rcount++ ) {
+        			if(grid[rcount][3] == null) {
+        				cardrow = rcount;
+        				cardcol = 3;
+        				break outer;
+        			}
+        		}
+        	} break;
+        
+        case 1: 
+        	
+        	outer:
+        	while(flag==0) {
+        		for (rcount = 0; rcount < max; rcount++ ) {
+        			if(grid[rcount][1] == null) {
+        				cardrow = rcount;
+        				cardcol = 1;
+        				break outer;
+        			}
+        		}
+        		for (rcount = 0; rcount < max; rcount++ ) {
+        			if(grid[rcount][4] == null) {
+        				cardrow = rcount;
+        				cardcol = 4;
+        				break outer;
+        			}
+        		}
+        		for (rcount = 0; rcount < max; rcount++ ) {
+        			if(grid[rcount][0] == null) {
+        				cardrow = rcount;
+        				cardcol = 0;
+        				break outer;
+        			}
+        		}
+        		for (rcount = 0; rcount < max; rcount++ ) {
+        			if(grid[rcount][2] == null) {
+        				cardrow = rcount;
+        				cardcol = 2;
+        				break outer;
+        			}
+        		}
+        		for (rcount = 0; rcount < max; rcount++ ) {
+        			if(grid[rcount][3] == null) {
+        				cardrow = rcount;
+        				cardcol = 3;
+        				break outer;
+        			}
+        		}
+        	} break;	
+        
+        case 2: 
+        	
+        	outer:
+        	while(flag==0) {
+        		for (rcount = 0; rcount < max; rcount++ ) {
+        			if(grid[rcount][2] == null) {
+        				cardrow = rcount;
+        				cardcol = 2;
+        				break outer;
+        			}
+        		}
+        		for (rcount = 0; rcount < max; rcount++ ) {
+        			if(grid[rcount][4] == null) {
+        				cardrow = rcount;
+        				cardcol = 4;
+        				break outer;
+        			}
+        		}
+        		for (rcount = 0; rcount < max; rcount++ ) {
+        			if(grid[rcount][0] == null) {
+        				cardrow = rcount;
+        				cardcol = 0;
+        				break outer;
+        			}
+        		}
+        		for (rcount = 0; rcount < max; rcount++ ) {
+        			if(grid[rcount][1] == null) {
+        				cardrow = rcount;
+        				cardcol = 1;
+        				break outer;
+        			}
+        		}
+        		for (rcount = 0; rcount < max; rcount++ ) {
+        			if(grid[rcount][3] == null) {
+        				cardrow = rcount;
+        				cardcol = 3;
+        				break outer;
+        			}
+        		}
+        	} break;
+        
+        case 3: 
+        	
+        	outer:
+        	while(flag==0) {
+        		for (rcount = 0; rcount < max; rcount++ ) {
+        			if(grid[rcount][3] == null) {
+        				cardrow = rcount;
+        				cardcol = 3;
+        				break outer;
+        			}
+        		}
+        		for (rcount = 0; rcount < max; rcount++ ) {
+        			if(grid[rcount][4] == null) {
+        				cardrow = rcount;
+        				cardcol = 4;
+        				break outer;
+        			}
+        		}
+        		for (rcount = 0; rcount < max; rcount++ ) {
+        			if(grid[rcount][0] == null) {
+        				cardrow = rcount;
+        				cardcol = 0;
+        				break outer;
+        			}
+        		}
+        		for (rcount = 0; rcount < max; rcount++ ) {
+        			if(grid[rcount][1] == null) {
+        				cardrow = rcount;
+        				cardcol = 1;
+        				break outer;
+        			}
+        		}
+        		for (rcount = 0; rcount < max; rcount++ ) {
+        			if(grid[rcount][2] == null) {
+        				cardrow = rcount;
+        				cardcol = 2;
+        				break outer;
+        			}
+        		}
+        	} break;	
+        	
+        	
+        	
+        }
+        grid[cardrow][cardcol] = card;
+		int[] playPos = {cardrow, cardcol};
+		return playPos;
+	}
+	
+	public int[] placePair(Card card, long millisRemaining, int findpair) {
+		int cardrow = 0;
+        int cardcol = 0;
+        int cardsuit = card.getSuit();
+        int flag = 1;
+        
+        switch(cardsuit) {
+        
+        case 0: 
+        	
+        	outer:
+        	while(flag==1) {
+        		if(grid[findpair][0] == null) {
+        			cardrow = findpair;
+        			cardcol = 0;
+        			flag = 0;
+        			break outer;
+        			}
+        		
+        		if(grid[findpair][4] == null) {
+    				cardrow = findpair;
+    				cardcol = 4;
+    				flag = 0;
+    				break outer;
+    			}
+        		
+        		if(grid[findpair][1] == null) {
+    				cardrow = findpair;
+    				cardcol = 1;
+    				flag = 0;
+    				break outer;
+    			}
+        		
+        		if(grid[findpair][2] == null) {
+    				cardrow = findpair;
+    				cardcol = 2;
+    				flag = 0;
+    				break outer;
+    			}
+        		
+        		if(grid[findpair][3] == null) {
+    				cardrow = findpair;
+    				cardcol = 3;
+    				flag = 0;
+    				break outer;
+    			}
+        		break outer;
+        			
+        	}
+        break;
+        
+        case 1: 
+        	
+        	outer:
+        	while(flag==1) {
+        		if(grid[findpair][1] == null) {
+        			cardrow = findpair;
+        			cardcol = 1;
+        			flag = 0;
+        			break outer;
+        			}
+        		
+        		if(grid[findpair][4] == null) {
+    				cardrow = findpair;
+    				cardcol = 4;
+    				flag = 0;
+    				break outer;
+    			}
+        		
+        		if(grid[findpair][0] == null) {
+    				cardrow = findpair;
+    				cardcol = 0;
+    				flag = 0;
+    				break outer;
+    			}
+        		
+        		if(grid[findpair][2] == null) {
+    				cardrow = findpair;
+    				cardcol = 2;
+    				flag = 0;
+    				break outer;
+    			}
+        		
+        		if(grid[findpair][3] == null) {
+    				cardrow = findpair;
+    				cardcol = 3;
+    				flag = 0;
+    				break outer;
+    			}
+        		break outer;
+        		
+        	}
+       
+        break;
+        
+        case 2: 
+        	
+        	outer:
+        	while(flag==1) {
+        		if(grid[findpair][2] == null) {
+        			cardrow = findpair;
+        			cardcol = 2;
+        			flag = 0;
+        			break outer;
+        			}
+        		
+        		if(grid[findpair][4] == null) {
+    				cardrow = findpair;
+    				cardcol = 4;
+    				flag = 0;
+    				break outer;
+    			}
+        		
+        		if(grid[findpair][0] == null) {
+    				cardrow = findpair;
+    				cardcol = 0;
+    				flag = 0;
+    				break outer;
+    			}
+        		
+        		if(grid[findpair][1] == null) {
+    				cardrow = findpair;
+    				cardcol = 1;
+    				flag = 0;
+    				break outer;
+    			}
+        		
+        		if(grid[findpair][3] == null) {
+    				cardrow = findpair;
+    				cardcol = 3;
+    				flag = 0;
+    				break outer;
+    			}
+        		break outer;
+        	}
+        break;
+
+        case 3: 
+        	
+        	outer:
+        	while(flag==1) {
+        		if(grid[findpair][3] == null) {
+        			cardrow = findpair;
+        			cardcol = 3;
+        			flag = 0;
+        			break outer;
+        			}
+        		
+        		if(grid[findpair][4] == null) {
+    				cardrow = findpair;
+    				cardcol = 4;
+    				flag = 0;
+    				break outer;
+    			}
+        		
+        		if(grid[findpair][0] == null) {
+    				cardrow = findpair;
+    				cardcol = 0;
+    				flag = 0;
+    				break outer;
+    			}
+        		
+        		if(grid[findpair][1] == null) {
+    				cardrow = findpair;
+    				cardcol = 1;
+    				flag = 0;
+    				break outer;
+    			}
+        		
+        		if(grid[findpair][2] == null) {
+    				cardrow = findpair;
+    				cardcol = 2;
+    				flag = 0;
+    				break outer;
+    			}
+        		break outer;
+        	}
+        break;
+        }
+        
+        if(flag==1) {
+        	return placeFlush(card, millisRemaining);
+        }
+        else {
+        grid[cardrow][cardcol] = card;
+        int playPos[] = {cardrow, cardcol};
+        return playPos;
+        }
+		
+	}
+	
+}
+	
+
