@@ -1,6 +1,6 @@
 """
 Finds the center of mass of different objects in an image and plots a red dot in them
-"""
+""" 
 
 from matplotlib import pyplot as plt
 from PIL import Image as img
