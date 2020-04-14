@@ -1,7 +1,7 @@
-#!/usr/bin/env python
-# coding: utf-8
+"""
+Finds the center of mass of different objects in an image and plots a red dot in them
+"""
 
-# In[19]:
 
 
 from matplotlib import pyplot as plt
