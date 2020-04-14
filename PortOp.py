@@ -1,11 +1,5 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Apr 30 14:12:56 2019
+# This is an exercise for Financial stock Portfolio Optimization using MonteCarlo, on the following stocks: Google, Apple, AMD, Nvidia, RGA, Berkshire Hathawa, P&G, Unilever, Disney 
 
-@author: amarti17
-"""
-# This is an exercise for Portfolio Optimization using MonteCarlo, on the following stocks: Google, Apple, AMD, Nvidia, RGA, Berkshire Hathawa, P&G, Unilever, Disney 
-#Import relevant libraries
 import pandas as pd
 import numpy as np
 import pandas_datareader.data as web
@@ -18,15 +12,9 @@ stock = ['GOOGL', 'AAPL', 'AMD', 'NVDA', 'RGA', 'BRK.A', 'PG', 'UN', 'DIS']
 yester=datetime.date.today()-pd.DateOffset(years=5)
 today=datetime.date.today()-pd.DateOffset(days=1)
 data = web.DataReader(stock, data_source='iex', start=yester, end=today)
-#data = web.DataReader(stock, data_source='yahoo', start='12/01/2017', end='12/31/2017')
 stportf=data['close']
 
-#stportf.to_csv('C:\\Users\\amarti17\\Google Drive\\UNB MSC of Data Science\\Python Practice\\stocks.csv')
-#stportf=pd.read_csv('C:\\Users\\amarti17\\Google Drive\\UNB MSC of Data Science\\Python Practice\\stocks.csv', header=0, index_col=0)
-
-#stportf=stportf.iloc[::-1]
 stret=stportf.pct_change()
-#print(stret.round(4)*100)
 
 mret = stret.mean()
 covret= stret.cov()
@@ -34,9 +22,9 @@ num_iter= 1000000
 sim_res = np.zeros((4+len(stock)-1,num_iter))
 
 for i in range(num_iter):
+        
 #Select random weights and normalize to set the sum to 1
         weights = np.array(np.random.random(len(stock)))
-        #weights = np.array(np.random.random(4))
         weights /= np.sum(weights)
 
 #Calculate the return and standard deviation for every step
