@@ -1,3 +1,6 @@
+//// This Cypher code creates a database in Neo4j based on the original dataset of the Chicago City Portal: 
+////  https://data.cityofchicago.org/Transportation/Traffic-Crashes-Crashes/85ca-t3if 
+
 /// Section 1.1 Add constraints to ensure unique IDs on Numbers. Accident nodes can have the same Report Number, but NOT same Sq ID.
 
 CREATE CONSTRAINT ON (accid:Accident) ASSERT accid.seq IS UNIQUE;
