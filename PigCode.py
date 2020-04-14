@@ -1,8 +1,6 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
+"""
+A Pig Die game is simulated to decide when and where to hold, using MonteCarlo simluations
+"""
 
 def pigDie(niter, n):
 
@@ -46,10 +44,6 @@ def pigDie(niter, n):
     print("This is the table for n = ", holdn," and ", iterations, "iterations" )
     print(probmatrix)
     return(probmatrix)
-
-
-# In[ ]:
-
 
 import pandas as pd
 import numpy as np
