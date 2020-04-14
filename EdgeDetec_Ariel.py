@@ -1,8 +1,7 @@
-#!/usr/bin/env python
-# coding: utf-8
+"""
+Assorted Image processing steps from sratch to achieve the Canny Edge detection
 
-# In[3]:
-
+"""
 
 from matplotlib import pyplot as plt
 from PIL import Image as img
@@ -132,8 +131,8 @@ def myCannyEdge(image, desired):
         
         '''
         
-        Below is the code for the Hystheresis filter. However, the image is just too dark to apply it, this is why I have refrained from using the code in the final product
-        #We apply Hysteresis to Z, with strong pixel = 255 and weak pixel = 50. However a very low contrast ima
+        
+        #We apply Hysteresis to Z, with strong pixel = 255 and weak pixel = 50.
         for i in range(1, H-1):
             for j in range(1, W-1):
                 if (hyster[i,j] == weak):
@@ -147,15 +146,10 @@ def myCannyEdge(image, desired):
                     except:
                         print("Error")
         io.imsave("EdgeDetec_Hyster.jpg", Z)
-        #io.imshow(rebuilt)
-        #io.imshow(Z)
+        io.imshow(rebuilt)
+        io.imshow(Z)
         ''' 
         
 myCannyEdge("York House_Fredericton.jpg", 'full')
-
-
-# In[ ]:
-
-
 
 
