@@ -1,16 +1,5 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[15]:
-
-
 """
-Use one distance-based classifier to build a digit classification program.
-Use the MNIST dataset for training and testing.
-    http://yann.lecun.com/exdb/mnist/
-    https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_digits.html
-    Each datapoint in the dataset is a 8x8 image of a digit number 0~9.
-Reference: book <computer vision with Python 3 by Saurabh Kapur, 2017, Chp 5>
+Provides digit classification from the digits Dataset using KNN.
 
 """
 from sklearn import datasets
@@ -47,16 +36,10 @@ print("This is the Accuracy \n", myAccu)
 print("This is the Classification Report \n", myReport)
 print("This is the Confusion matrix \n", myConfMat)
 
-# evaluate the algorithm
+
 """We get can see the precision of our KNN algorithm at 1 nearest neighbor is almost perfect.
 The confusion matrix confirms this assessment. We are classifying most digits properly 100% of the time
-with only a few mistakes in digits 1 and 3 of the dataset. KNN seems to be a good image classifier -  and the data is impeccable too
+with only a few mistakes in digits 1 and 3 of the dataset. KNN seems to be a good image classifier -  and the original data is impeccable too
 
 """
-
-
-# In[ ]:
-
-
-
 
