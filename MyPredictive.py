@@ -1,4 +1,8 @@
-# -*- coding: utf-8 -*-
+"""
+A SVM Classifier is used to predict occupation of chargin stations
+"""
+
+
 from sklearn.svm import SVC
 from sklearn import svm
 import sklearn as sk
@@ -7,8 +11,6 @@ import datetime#imported like this in order to be able to use datetime.dateime
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, confusion_matrix  
 
-
-#def myPredictive():
 
 #Formatting the dates and adding together both datasets
 myStdData = pd.read_csv("C:\\Users\\Ariel Martinez Salas\\Google Drive\\UNB MSC of Data Science\\1st Trimester\\GGE 6505 Intro to Data Science\\Assignment Instructions\\Assignment 2\\430pm_Standard2.csv", header=None, names=['TimeStamp', 'ChPointID', 'ChType','Status'], sep= ' ')#Reads the StandardData.csv file and incorporates corresponding variable names on the columns
@@ -48,5 +50,3 @@ myConfMat = confusion_matrix(Ytest,YPred)
 print(myAccu)
 print(myReport)
 print(myConfMat)
-#if __name__ == "__myPredictive__":
-    #myPredictive()
