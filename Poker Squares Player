@@ -3,8 +3,9 @@ import java.util.Collections;
 import java.util.Stack;
 /**
  * FlushPlayer - a simple example implementation of the player interface for PokerSquares that 
- * attempts to get flushes in the first four columns.
- * Author: ________, based on code provided by Todd W. Neller and Michael Fleming
+ * attempts to get equal cards on the horizontal lanes while keeping flush in the vertical lanes.
+ * Author: Ariel Martinez Salas, provides dealing decision on pokersquares grid whose game is evaluated by code from
+  Todd W. Neller and Michael Fleming
  */
 public class CS6705ArielMartinez implements PokerSquaresPlayer {
 
@@ -52,9 +53,6 @@ public class CS6705ArielMartinez implements PokerSquaresPlayer {
 			else return placePair(card, millisRemaining, findpair);
 		
 	}
-	
-	
-	
 	/* (non-Javadoc)
 	 * @see PokerSquaresPlayer#getName()
 	 */
