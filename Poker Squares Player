@@ -22,7 +22,7 @@ public class CS6705ArielMartinez implements PokerSquaresPlayer {
 	public void setPointSystem(PokerSquaresPointSystem system, long millis) {
 		
 	}
-	
+	 
 	/* (non-Javadoc)
 	 * @see PokerSquaresPlayer#init()
 	 */
