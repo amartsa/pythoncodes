@@ -1,8 +1,10 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[26]:
-
+"""
+Image Classifier extracts shape features from images using Haralick and Hu Moments, as well as Histogram information.
+These different features ensure that certain resilience to variability of shapes (such as cat ears and ears of certain dogs,
+like a Chihuaha, for example) are countered by the colors (Histograms) these shapes delineate and their variability of these (Haralick)
+For example: cats have pointy ears but are mostly gry or tortoise colored, whereas chihuahuas also have pointy ears
+but are normaly beige or brown colored.
+"""
 
 import cv2
 import numpy as np
@@ -18,9 +20,7 @@ from sklearn.preprocessing import MinMaxScaler
 
 def fd_hu_moments(image):
     
-    """ 
-    Original algorithm from DataTurks: https://medium.com/@dataturks/understanding-svms-for-image-classification-cf4f01232700 
-    Adapted for the purposes of this Lab
+    """
     fd_hu_moments: image -> flattened vectors with hu moments
     Purpose: Receives an image and returns a flattened vector with the image's Hu Moments, which is a
     feature that can be used for SVM Classification
@@ -34,8 +34,6 @@ def fd_hu_moments(image):
 def fd_haralick(image):
     
     """ 
-    Original algorithm from DataTurks: https://medium.com/@dataturks/understanding-svms-for-image-classification-cf4f01232700 
-    Adapted for the purposes of this Lab
     fd_haralick: image -> flattened vector with a haralick feature vector
     Purpose: Receives an image and returns a flattened vector with the image's haralick texture feature, which is a
     feature that can be used for SVM Classification
@@ -51,8 +49,6 @@ def fd_haralick(image):
 def fd_histogram(image):
     
     """ 
-    Original algorithm from DataTurks: https://medium.com/@dataturks/understanding-svms-for-image-classification-cf4f01232700 
-    Adapted for the purposes of this Lab
     fd_histogram: image -> flattened vector with a haralick feature vector
     Purpose: Receives an image and returns a flattened vector with the image's haralick texture feature, which is a
     feature that can be used for SVM Classification
